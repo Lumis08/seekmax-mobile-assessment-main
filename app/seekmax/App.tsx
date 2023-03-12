@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import React from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,9 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import useActiveJobs from './src/hooks/useActiveJobs';
+import RootNavigator from './src/navigation/RootNavigator';
 
 // GraphQL
 const httpLink = createHttpLink({uri: 'http://192.168.1.107:3002'});
@@ -30,37 +27,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// Navigation
-const Stack = createNativeStackNavigator();
-
-function HomeScreen() {
-  const {loading, error, data} = useActiveJobs(3, 1);
-
-  useEffect(() => {
-    console.log(JSON.stringify(data));
-    console.log(loading);
-    console.log(error);
-    console.log('--- end of line ---');
-  }, [data, loading, error]);
-
-  return (
-    <SafeAreaView
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Text>isLoading: {loading ? 'true' : 'false'}</Text>
-      <Text>data: {data ? JSON.stringify(data) : 'No Data'}</Text>
-    </SafeAreaView>
-  );
-}
-
 function App(): JSX.Element {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <RootNavigator />
     </ApolloProvider>
   );
 }

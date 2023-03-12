@@ -8,17 +8,9 @@ export const ACTIVE_JOBS_QUERY = gql`
         description
         positionTitle
         haveIApplied
-        industry
-        location
-        salaryRange {
-          max
-          min
-        }
       }
       hasNext
       page
-      size
-      total
     }
   }
 `;
