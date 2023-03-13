@@ -9,11 +9,10 @@ function JobListingScreen() {
   const navigation = useNavigation<JobListingScreenNavigationProp>();
   const {loadMore, jobData} = useActiveJobs();
 
-  const onJobItemClick = (id: string) => {
-    console.log(id);
+  const onJobItemClick = (id: string, jobTitle: string) => {
     navigation.navigate('JobDetail', {
       jobId: id,
-      screenTitle: id,
+      screenTitle: jobTitle,
     });
   };
 
@@ -26,18 +25,20 @@ function JobListingScreen() {
         renderItem={({item}) => {
           return <JobItem job={item} onJobItemClick={onJobItemClick} />;
         }}
-        ItemSeparatorComponent={() => <View style={{height: 10}} />}
+        ItemSeparatorComponent={JobListingSeperator}
         onEndReached={() => loadMore()}
       />
     </SafeAreaView>
   );
 }
 
+function JobListingSeperator() {
+  return <View style={{height: 10}} />;
+}
+
 const styles = StyleSheet.create({
   jobListingScreen: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 16,
   },
 });

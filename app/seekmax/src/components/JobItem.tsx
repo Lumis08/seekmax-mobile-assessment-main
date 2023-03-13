@@ -4,12 +4,16 @@ import {Job} from '../model/job.model';
 import ColorTheme from '../theme/color.theme';
 import TextTheme from '../theme/text.theme';
 
-type JobItemProp = {job: Job; onJobItemClick: (jobId: string) => void};
+type JobItemProp = {
+  job: Job;
+  onJobItemClick: (jobId: string, jobTitle: string) => void;
+};
 
-function JobItem({job, onJobItemClick}: JobItemProp): JSX.Element {
+function JobItem({job, onJobItemClick}: JobItemProp) {
   return (
     <View style={styles.jobItemCard}>
-      <TouchableOpacity onPress={() => onJobItemClick(job._id)}>
+      <TouchableOpacity
+        onPress={() => onJobItemClick(job._id, job.positionTitle)}>
         <View style={styles.jobItemTitleSection}>
           <Text style={styles.jobItemTitle}>{job.positionTitle}</Text>
           {job.haveIApplied ? <JobItemAppliedIndicator /> : null}
@@ -20,7 +24,7 @@ function JobItem({job, onJobItemClick}: JobItemProp): JSX.Element {
   );
 }
 
-function JobItemAppliedIndicator(): JSX.Element {
+function JobItemAppliedIndicator() {
   return (
     <View style={styles.appliedIndicatorCard}>
       <Text style={styles.appliedIndicatorText}>Applied</Text>

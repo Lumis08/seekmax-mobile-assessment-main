@@ -14,3 +14,18 @@ export const ACTIVE_JOBS_QUERY = gql`
     }
   }
 `;
+
+export const JOB_DETAIL_QUERY = gql`
+  query JobDetailQuery($jobId: String!) {
+    job(id: $jobId) {
+      _id
+      description
+      haveIApplied
+      positionTitle
+      salaryRange {
+        max
+        min
+      }
+    }
+  }
+`;
