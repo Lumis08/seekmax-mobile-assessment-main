@@ -5,3 +5,9 @@ export const APPLY_JOB_MUTATION = gql`
     apply(jobId: $jobId)
   }
 `;
+
+export const AUTH_MUTATION = gql`
+  mutation Auth($username: String!, $password: String!) {
+    auth(username: $username, password: $password)
+  }
+`;

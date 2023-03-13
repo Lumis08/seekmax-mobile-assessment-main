@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import JobDetailScreen from '../screens/JobDetailScreen';
 import JobListingScreen from '../screens/JobListingScreen';
+import LoginScreen from '../screens/LoginScreen';
 import ColorTheme from '../theme/color.theme';
 import {RootStackParamList} from './types.navigation';
 
@@ -32,6 +33,12 @@ function RootNavigator() {
           }) => ({
             title: screenTitle ? screenTitle : 'Job Detail',
           })}
+        />
+        <RootStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{title: 'Login'}}
+          initialParams={{jobId: undefined}}
         />
       </RootStack.Navigator>
     </NavigationContainer>

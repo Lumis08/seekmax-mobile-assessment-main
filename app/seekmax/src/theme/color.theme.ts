@@ -6,6 +6,8 @@ const ColorTheme = {
   textSecondary: '#69768C',
   textReversed: '#FFFFFF',
   button: '#2765CF',
+  success: '#4BB543',
+  error: '#B00020',
 };
 
 export default ColorTheme;
