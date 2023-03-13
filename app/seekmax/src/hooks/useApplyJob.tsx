@@ -4,6 +4,7 @@ import {APPLY_JOB_MUTATION} from '../graphql/mutations';
 const useApplyJob = () => {
   const [mutateFunction, {data, loading}] = useMutation(APPLY_JOB_MUTATION);
 
+  // Apply job with the given jobId
   const applyJob = (jobId: string) => {
     mutateFunction({variables: {jobId}});
   };

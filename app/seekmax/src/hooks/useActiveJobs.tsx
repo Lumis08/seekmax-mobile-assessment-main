@@ -15,13 +15,14 @@ const useActiveJobs = () => {
     page: 1,
   });
 
+  // Observe incoming API data and proceed to data mapping logic
   useEffect(() => {
     if (!data) return;
 
     updateJobData(data);
   }, [data]);
 
-  // Handle pagination loading
+  // Handle pagination loading logic
   const loadMore = async () => {
     if (!jobData.hasNext) return;
 
@@ -32,7 +33,7 @@ const useActiveJobs = () => {
     updateJobData(resData.data);
   };
 
-  // Update JobData state
+  // Mapping and update the job listing data
   const updateJobData = (resData: ActiveJobsResponse) => {
     const newJobData: JobUiData = {
       jobs: [...jobData.jobs, ...resData.active.jobs],

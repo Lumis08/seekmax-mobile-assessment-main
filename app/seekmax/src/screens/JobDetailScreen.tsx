@@ -15,7 +15,7 @@ function JobDetailScreen() {
     useJobDetail(jobId);
   const {applyJob, applyData, applyLoading} = useApplyJob();
 
-  // Observe and update apply status
+  // Observe and update the current job detail's apply status
   useEffect(() => {
     if (applyData == undefined) return;
     updateJobAppliedStatus(applyData.apply);

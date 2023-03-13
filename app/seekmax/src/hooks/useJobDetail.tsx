@@ -15,11 +15,13 @@ const useJobDetail = (jobId: string) => {
     salaryRange: {min: 0, max: 0},
   });
 
+  // Handling the update logic of current job detail's apply status
   const updateJobAppliedStatus = (applied: boolean) => {
     const newJobDetail: JobDetail = {...jobDetail, haveIApplied: applied};
     setJobDetail(newJobDetail);
   };
 
+  // Observe incoming API data and map into the jobDetail state
   useEffect(() => {
     if (!data) return;
 

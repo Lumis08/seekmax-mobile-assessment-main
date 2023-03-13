@@ -7,11 +7,13 @@ export type RootStackParamList = {
   Login: {jobId: string | undefined};
 };
 
+// Job Listing Screen
 export type JobListingScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'JobListing'
 >;
 
+// Job Detail Screen
 export type JobDetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'JobDetail'
@@ -21,6 +23,7 @@ export type JobDetailScreenRouteProp = RouteProp<
   'JobDetail'
 >;
 
+// Login Screen
 export type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'Login'

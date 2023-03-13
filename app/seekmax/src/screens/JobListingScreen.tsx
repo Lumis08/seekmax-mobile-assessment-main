@@ -9,6 +9,7 @@ function JobListingScreen() {
   const navigation = useNavigation<JobListingScreenNavigationProp>();
   const {loadMore, jobData} = useActiveJobs();
 
+  // Click handling for navigate to Job Detail Screen
   const onJobItemClick = (id: string, jobTitle: string) => {
     navigation.navigate('JobDetail', {
       jobId: id,
