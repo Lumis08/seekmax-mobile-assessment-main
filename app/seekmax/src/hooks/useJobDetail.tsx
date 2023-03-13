@@ -15,6 +15,11 @@ const useJobDetail = (jobId: string) => {
     salaryRange: {min: 0, max: 0},
   });
 
+  const updateJobAppliedStatus = (applied: boolean) => {
+    const newJobDetail: JobDetail = {...jobDetail, haveIApplied: applied};
+    setJobDetail(newJobDetail);
+  };
+
   useEffect(() => {
     if (!data) return;
 
@@ -22,7 +27,7 @@ const useJobDetail = (jobId: string) => {
     setJobDetail(jobDetailRes.job);
   }, [data]);
 
-  return {jobDetail, loading, error};
+  return {updateJobAppliedStatus, jobDetail, loading, error};
 };
 
 export default useJobDetail;

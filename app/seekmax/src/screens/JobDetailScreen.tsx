@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, Text, Button, View, StyleSheet} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {JobDetailScreenRouteProp} from '../navigation/types.navigation';
 import useJobDetail from '../hooks/useJobDetail';
+import useApplyJob from '../hooks/useApplyJob';
 import ColorTheme from '../theme/color.theme';
 import TextTheme from '../theme/text.theme';
 
@@ -10,7 +11,15 @@ function JobDetailScreen() {
   const {
     params: {jobId},
   } = useRoute<JobDetailScreenRouteProp>();
-  const {jobDetail, loading, error} = useJobDetail(jobId);
+  const {updateJobAppliedStatus, jobDetail, loading, error} =
+    useJobDetail(jobId);
+  const {applyJob, applyData, applyLoading} = useApplyJob();
+
+  // Observe and update apply status
+  useEffect(() => {
+    if (applyData == undefined) return;
+    updateJobAppliedStatus(applyData.apply);
+  }, [applyData]);
 
   return (
     <SafeAreaView style={styles.jobDetailScreen}>
@@ -22,9 +31,11 @@ function JobDetailScreen() {
         </Text>
         <Button
           title={jobDetail.haveIApplied ? 'Applied' : 'Apply'}
-          disabled={loading || !!error || jobDetail.haveIApplied}
+          disabled={
+            loading || !!error || applyLoading || jobDetail.haveIApplied
+          }
           color={ColorTheme.button}
-          onPress={() => console.log('Apply button pressed!')}
+          onPress={() => applyJob(jobId)}
         />
       </View>
 
